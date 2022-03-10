@@ -9,6 +9,7 @@ Key不可变，Value可变。一旦一个键值对加入dict后，它对应的ke
 key不能重复,value可以重复
 使用dict[key]=value添加元素
 使用pop(key)或者del(dict[key])删除元素
+
 '''
 d = {'bai':100,'q':1000,'g':1,'hao':100,'bai':10000}
 print(d)
