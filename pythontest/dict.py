@@ -19,28 +19,29 @@ print(d)
 print(d['bai'])
 
 if 'q' in d:
-	print 111
-	print d.get('q')
+
+	print(111)
+	print(d.get('q'))
 
 if 100 in d:
-	print 100
+	print(100)
 	
 for k in d:
-	print str(k) + ':' + str(d[k])
+	print(str(k) + ':' + str(d[k]))
 	
 	
 for k, v in d.items():
-	print str(k) + ':' + str(v)
+	print(str(k) + ':' + str(v))
 	
-print d.keys()
+print(d.keys())
 
 d.pop('bai')
-print d
+print(d)
 
 d['lily'] = ['a',1]
-print d
+print(d)
 
 del(d['jone'])
-print d
+print(d)
 
 	
