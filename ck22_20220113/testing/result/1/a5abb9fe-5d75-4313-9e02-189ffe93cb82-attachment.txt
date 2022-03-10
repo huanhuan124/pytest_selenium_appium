@@ -1,0 +1,2 @@
+INFO     root:test_calc_fixture_param.py:40 加法用例P0级别
+INFO     root:test_calc_fixture_param.py:41 输入数据：(1, 1)，预期数据：3

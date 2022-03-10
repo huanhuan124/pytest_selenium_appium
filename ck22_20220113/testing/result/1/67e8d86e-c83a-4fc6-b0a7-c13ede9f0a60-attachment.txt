@@ -1,0 +1,2 @@
+INFO     root:test_calc_fixture_param.py:78 加法用例P1_2级别
+INFO     root:test_calc_fixture_param.py:79 输入数据：(2, 99.01)，预期数据：参数大小超出范围
