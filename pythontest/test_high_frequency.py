@@ -61,3 +61,10 @@ class Test_High_Frequency:
                     print(os.path.join(root,name))
         else:
             print("path 不存在")
+
+
+    def test_sort(self):
+        """
+        s = “ajldjlajfdljfddd”，去重并从小到大排序输出”adfjl”
+        :return:
+        """
