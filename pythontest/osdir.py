@@ -86,6 +86,7 @@ class OsDir:
                     print('当前路径------', namedir,'准备删除文件')
                     #删除文件
                     os.remove(namedir)
+
         else:
             print(f'{path}不存在')
 
@@ -117,4 +118,4 @@ print("========================================")
 ostest.traverseFolder2(path)
 
 print("========================================")
-ostest.deleteDir2(path)
+ostest.deleteDir(path)
