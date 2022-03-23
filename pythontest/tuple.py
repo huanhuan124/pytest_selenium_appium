@@ -3,8 +3,9 @@
 #Tuple可以看做是一种“不变”的List，访问也是通过下标，用小括号（）表示。
 #但是不能重新赋值替换，也没有pop和insert、append方法。不变的意思是位置不可变
 tu = (1,2,'3',['a',3],{'b':123,'c':456})
-print tu
-print type(tu)
+print(tu)
+print
+print(type(tu))
 
 '''
 {"bookBuyCarDate":"2016-09-08","deposit":600,"deptId":124,"finalPrice":"235000.00","firstRate":0,
