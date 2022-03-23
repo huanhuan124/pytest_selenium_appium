@@ -112,10 +112,13 @@ class OsDir:
 path = 'E:\项目文档\\2022\\test'
 ostest = OsDir()
 # ostest.traverseFolder(os.getcwd())
-ostest.traverseFolder(path)
-print("========================================")
-# ostest.traverseFolder2(os.getcwd())
-ostest.traverseFolder2(path)
-
-print("========================================")
-ostest.deleteDir(path)
+# ostest.traverseFolder(path)
+# print("========================================")
+# # ostest.traverseFolder2(os.getcwd())
+# ostest.traverseFolder2(path)
+#
+# print("========================================")
+# ostest.deleteDir(path)
+print(os.getcwd())
+print(os.path.dirname(os.path.realpath('__file__')))
+print(os.path.dirname(os.path.abspath('__file__')))

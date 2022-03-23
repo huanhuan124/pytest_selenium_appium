@@ -106,3 +106,108 @@ class Test_High_Frequency:
             pass
         else:
             pass
+
+
+    def test_samecharnum(self):
+        '''
+        需求：统计列表list1中元素3的个数，并返回每个元素的索引
+        list.count() 用于统计某个元素在列表中出现的次数。
+        list.index()  用于从列表中找出某个值第一个匹配项的索引位置。
+        :return:
+        '''
+        list1 = [3, 5, 8, 9, 2, 10, 6, 2, 8, 3, 4, 5, 5, 4, 1, 3, 9, 7, 10, 2]
+        count = list1.count(3)
+        print(count)
+        index_list = []
+        index = -1
+
+        # 通过list.index()方法的__start参数，指定起始索引
+        for i in range(0, count):
+            print('iiiiiiiiii',i)
+            index = list1.index(3, index + 1)
+            print(index)
+            index_list.append(index)
+
+        print(index_list)
+
+    def test_samecharnum2(self):
+        list1 = [3, 5, 8, 9, 2, 10, 6, 2, 8, 3, 4, 5, 5, 4, 1, 3, 9, 7, 10, 2]
+        len_list = len(list1)
+        list_index = []
+        num = 0
+        for i in range(len_list):
+            if list1[i] == 3:
+                num += 1
+                list_index.append(i)
+        print(f"list1中3出现的次数是：{num}")
+        print("他的索引是：")
+        print(list_index)
+
+    def test_samcechar(self):
+        """
+        整数数组中只有一个元素出现了一次，其他元素都出现了2次或者更多次，找出这个只出现了一次的元素
+        :return:
+        """
+        list1 = [3, 5, 3, 9, 5, 5]
+        a = {}
+        for i in list1:
+            a[i] = list1.count(i)
+            if list1.count(i) == 1:
+                print("只出现了一次的元素是：",i)
+        print(a)
+
+    def test_samcechar2(self):
+        """
+        整数数组中只有一个元素出现了一次，其他元素都出现了2次或者更多次，找出这个只出现了一次的元素
+        :return:
+        """
+        list1 = [3, 5, 3, 9, 5, 5]
+        list1_set = set(list1)
+        print(list1_set)
+        a = {}
+        for i in list1_set:
+            a[i] = list1.count(i)
+            if list1.count(i) == 1:
+                print("只出现了一次的元素是：",i)
+        print(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
