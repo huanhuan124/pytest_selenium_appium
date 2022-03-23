@@ -32,3 +32,15 @@ f = 3
 """
 print(f,e,m,n,g)
 print(id(f),id(e),id(m),id(n),id(g))
+
+def output_grade(grade):
+    def output_student(name,gender):
+        print(f'霍格沃兹开学了，学生姓名为：{name}， 性别为：{gender}， 年级为：{grade}')
+    return output_student
+
+
+stu_info = output_grade(1)
+stu_info('Tom','female')
+stu_info('Jelly','female')
+
+
