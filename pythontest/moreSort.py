@@ -31,14 +31,16 @@ class MoreSort:
         重复第二步，直到所有元素均排序完毕。
         :return:
         """
-        lista = [10, 5, 3, 9, 0, 1, 3]
+        lista = [10, 5, 3, 9]
         print("排序前：", lista)
         n = len(lista)
         for i in range(n):
             min = i
+            print(min)
             for j in range(i+1,n):
                 if lista[j] < lista[min]:
                     lista[j], lista[min] = lista[min], lista[j]
+                print(lista)
 
         print("排序后：", lista)
 
@@ -75,18 +77,52 @@ class MoreSort:
 
         return less+middle+more
 
+    def mergelist(self):
+        list1 = [0,1,2,3]
+        list2 = [1,3,5]
+        list3,list4 = [],[]
+        dict4 = {}
+        m = len(list1)
+        n = len(list2)
+        list1[m:] = list2
+
+        list1.sort()
+        print('排序后的拼接数组：',list1)
+
+        # print(set(list1))
+        for i in range(len(list1)):
+            if list1[i] in list3:
+                continue
+            else:
+                list3.append(list1[i])
+        print('去重后的数组：',list3)
+        #找出重复数=1 的元素和索引
+
+        for j in list1:
+
+            dict4[j] = list1.count(j)
+
+        num = list1.count(3)
+        index  = -1
+        for j in range(0,num):
+            index = list1.index(3,index+1)
+            list4.append(index)
+        print('每个元素出现的次数是：',dict4)
+        print('元素3的索引是',list4)
+
+
 
 lista = [10, 5, 3, 9, 0, 1, 3]
 qs = MoreSort()
-#快速排序
-print("快速排序-----------")
-print("排序前：", lista)
-last_list = qs.quickSort(lista)
-print("排序后：",last_list)
+# #快速排序
+# print("快速排序-----------")
+# print("排序前：", lista)
+# last_list = qs.quickSort(lista)
+# print("排序后：",last_list)
+#
+# print("冒泡排序-----------")
+# qs.bubbleSort()
 
-print("冒泡排序-----------")
-qs.bubbleSort()
-
-print("选择排序-----------")
-qs.selectionSort()
-
+# print("选择排序-----------")
+# qs.selectionSort()
+qs.mergelist()
