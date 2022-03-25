@@ -51,17 +51,20 @@ def list_insert2():
     #注意：考虑数大于数组中的所有数的情况，此时，需要把数插入到数组的最后
     arr1 = [1, 3, 4, 6, 10]
     print(arr1)
-    x = 5
+    x = 100
     print(x)
     arr3 = arr1.copy()			# 复制数组1
-    i = 0
+    print(len(arr1))
     for i in range(len(arr1)):
         if x <= arr1[i]:
+            arr3.insert(i, x)
             break;
     print(i)
+    if i == len(arr1)-1:
+        arr3.insert(i+1,x)
+    print(arr3)
 
-    for i in range(i,len(arr1)+1):
-        1
+
 
 
 
@@ -96,7 +99,37 @@ def merge_list():
             c.append(b[j])
     print(c)
 
+def merge_list2():
+    print("~~~~~~~~~~~~~~~~~~~~合并两个有序数组~~~~~~~`~~~~~~~~~~~~~~")
+    #合并两个有序数组
+    a = [1,2,4]
+    b = [0,4,9]
+    print(a)
+    print(b)
 
+    i ,j = 0, 0
+    c = []
+    while i<len(a) or j<len(b):
+        if i == len(a):
+            c.append(b[j])
+            j = j+1
+        elif j == len(b):
+            c.append(a[i])
+            i = i+1
+        elif a[i] < b[j]:
+            c.append(a[i])
+            i = i +1
+        else:
+            c.append(b[j])
+            j = j+1
+    #深拷贝，把c的内容全部赋值给A
+    a[:] = c
+    print(c)
+    print(a)
+    #
+    # a[0] = 1
+    # print(c)
+    # print(a)
 
 
 
@@ -107,7 +140,7 @@ def find_by_middle(lista, left, right, x):
     print("中间值", middle)
 
     if left <= right:
-        if lista[middle] == x:
+        if x == lista[middle]:
             return middle
         elif x < lista[middle]:
             return find_by_middle(lista, left, middle-1, x)
@@ -142,7 +175,7 @@ def find_by_middle2(lista, left, right, x):
 # result = find_by_middle2(c,0,len(c)-1,d)
 # print(d,'在数组中的索引值是：',result)
 #
-# merge_list()
+merge_list2()
 list_insert2()
 
 
