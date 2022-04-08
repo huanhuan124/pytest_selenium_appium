@@ -21,6 +21,7 @@ class MoreSort:
             for j in range(1,length - i):
                 if lista[j-1] > lista[j]:
                     lista[j-1], lista[j] = lista[j],lista[j-1]
+            print(lista)
         print("排序后：",lista)
 
     def selectionSort(self):
@@ -36,10 +37,11 @@ class MoreSort:
         n = len(lista)
         for i in range(n):
             min = i
-            print(min)
+            print(lista[min])
             for j in range(i+1,n):
                 if lista[j] < lista[min]:
                     lista[j], lista[min] = lista[min], lista[j]
+
                 print(lista)
 
         print("排序后：", lista)
@@ -115,14 +117,14 @@ class MoreSort:
 lista = [10, 5, 3, 9, 0, 1, 3]
 qs = MoreSort()
 # #快速排序
-# print("快速排序-----------")
-# print("排序前：", lista)
-# last_list = qs.quickSort(lista)
-# print("排序后：",last_list)
+print("快速排序-----------")
+print("排序前：", lista)
+last_list = qs.quickSort(lista)
+print("排序后：",last_list)
 #
-# print("冒泡排序-----------")
-# qs.bubbleSort()
+print("冒泡排序-----------")
+qs.bubbleSort()
 
-# print("选择排序-----------")
-# qs.selectionSort()
+print("选择排序-----------")
+qs.selectionSort()
 qs.mergelist()

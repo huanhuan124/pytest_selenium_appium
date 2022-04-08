@@ -487,19 +487,62 @@ def duiwei_replace2(before,after):
 
 #before = '天青色等烟雨'
 #after = '炊烟袅袅升起'
-before = '等等'
-after = 'ab'
-duiwei_replace2(before, after)
+# before = '等等'
+# after = 'ab'
+# duiwei_replace2(before, after)
 
 def merge_list(list1,list2):
     """
-    合并两个有序数组
+    #合并两个有序数组
+    list1 = [1,2,4,6,10,11,12,13]
+    list2 = [0,4,9]
     :param list1:
     :param list2:
     :return:
     """
+    la = len(list1)
+    lb = len(list2)
+    i,j = 0,0
+    res = []
+    while i<la and j<lb :
+        # print(i,j)
+        if list1[i] < list2[j]:
+            res.append(list1[i])
+            i = i+1
+        else:
+            res.append(list2[j])
+            j = j +1
+    if i<la:
+        for i in range(i,la):
+            res.append(list1[i])
+    if j<lb:
+        for j in range(j,lb):
+            res.append(list2[j])
+    return res
 
-def erfen_find(nums,n):
+# list1 = [1,2,4,6,10,11,12,13]
+# list2 = [0,4,9]
+# print(merge_list(list1, list2))
+
+
+
+
+
+def find_min_inex(nums,n):
+    """
+        nums = [1,2,2,4,5]
+        n = 2
+        找出n在nums里面第一次出现时的下标
+        :param nums:
+        :param n:
+        :return:
+    """
+    for i in range(len(nums)):
+        if nums[i] == n:
+            return i
+
+
+def erfen_find_min_inex(nums,n):
     """
     nums = [1,2,2,4,5]
     n = 2
@@ -508,25 +551,151 @@ def erfen_find(nums,n):
     :param n:
     :return:
     """
+    l = 0
+    r = len(nums)-1
+
+    while l < r :
+        middle = (l + r) // 2
+        if n < nums[middle]:
+            r = middle - 1
+        elif n > nums[middle]:
+            l = middle + 1
+        else:
+            #实现找到那个数，但是不一定是最小的下标
+            # return middle
+            # print(middle)
+            # 实现找到那个数，并且是最小的下标
+            for i in range(middle,-1,-1):
+                # print(i)
+                if nums[i] == nums[i-1]:
+                    if i==0:
+                        return 0
+                    continue
+                else:
+                    return i
+    else:
+        return None
+
+
+def hanshu_find_min_inde(nums,n):
+    x = nums.count(n)
+    # print(x)
+    index = -1
+    res = []
+    for i in range(x):
+        index = nums.index(n,index+1)
+        res.append(index)
+    print(res)
+    return res[0]
+
+
+# nums = [1,1,1,3,5,5,6]
+# n = 1
+# print(erfen_find_min_inex(nums, n))
+# print(find_min_inex(nums, n))
+# print(hanshu_find_min_inde(nums,n))
+
+
 def quicksort(nums):
     """
+        步骤:
+        nums = [1,4,2,3,8]
+        从数列中挑出一个元素，称为”基准”（pivot），
+        重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。
+        递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
 
-    :param nums:
-    :return:
-    """
+        :return:
+        """
+    less = []
+    more = []
+    middle = []
+    n = len(nums)
+    if n <= 1:
+        return nums
+    else:
+        p = nums[0]
+        for i in nums:
+            if i < p:
+                less.append(i)
+            elif i > p:
+                more.append(i)
+            else:
+                middle.append(i)
+        less = quicksort(less)
+        more = quicksort(more)
 
-def selectsort(nums):
-    """
+    return less + middle + more
 
-    :param nums:
-    :return:
+
+
+nums = [4,1,2,3,8]
+print(quicksort(nums))
+
+
+
+def selectsort(lista):
     """
+            步骤:
+            在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，
+            再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
+            重复第二步，直到所有元素均排序完毕。
+            每一轮里面都设定第一个为最小数，然后一轮一轮比较，从他后面一个开始跟他比，如果有比他小的，跟他换位置，继续比，再遇到小的，就继续换位置
+            :return:
+    """
+    # lista = [10, 5, 3, 9]
+    print("排序前：", lista)
+    n = len(lista)
+    for i in range(n):
+        min = i
+        for j in range(i+1,n):
+            if lista[j] < lista[min]:
+                lista[j],lista[min] = lista[min],lista[j]
+
+    print("排序后：", lista)
+
+
 def maopaosort(nums):
     """
 
     :param nums:
     :return:
     """
+    for i in range(len(nums)):
+        for j in range(i+1,len(nums)):
+            if nums[i]>nums[j]:
+                nums[j],nums[i] = nums[i],nums[j]
+    return nums
+nums = [1,4,2,3,8]
+# print(maopaosort(nums))
+selectsort(nums)
+
+
+def list_insert_new(arr,n):
+    print("~~~~~~~~~~~~~~~~~~~把一个数字插入到有序数组中，使他仍然有序~~~~~~~~~~~~~~~~~~~~~~~~~")
+    # 把一个数字插入到有序数组中，使他仍然有序
+    # 注意：考虑数大于数组中的所有数的情况，此时，需要把数插入到数组的最后
+    # insert(i,x) 在i的位置上插入x的值，后面的元素值向后移动
+    # arr = [1, 3, 4, 6, 10]
+    print(arr)
+    for i in range(len(arr)):
+        if n <= arr[i]:
+            arr.insert(i,n)
+            break
+    if i == len(arr)-1:
+        arr.insert(i+1,n)
+    print(arr)
+
+
+arr = [1, 3, 3, 4, 6, 10]
+n = 11
+list_insert_new(arr,n)
+
+
+
+
+
+
+
 
 
 def list_insert():
@@ -669,6 +838,83 @@ def find_by_middle2(lista, left, right, x):
         return None
 
 
+def remove_repeat_char_sort():
+        """
+        s = "ajldjljfd"，去重并从小到大排序输出"adfjl"
+        :return:
+        """
+
+        s = "ajldjljfd"
+        res = []
+        for i in s:
+            if i not in res:
+                res.append(i)
+        print(res)
+        res.sort()
+        print(res)
+        resnew = ''.join(res)
+        print(resnew)
+
+remove_repeat_char_sort()
+
+def repeatchar():
+        """
+        找出数组中重复的数字
+        在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+        :return:
+        """
+        arr = [1,2,2,3,3,3]
+        repeatdic = {}
+
+        for i in arr:
+            repeatdic[i] = arr.count(i)
+
+        print(repeatdic)
+        return repeatdic
+
+        # for i in arr:
+        #     if i not in res:
+        #         res.append(i)
+        #     else:
+        #         return i
+
+
+print(repeatchar())
+
+
+def max_lianxu_one_num():
+        """
+        最大连续1的个数
+        :return:
+        """
+        lista = [1, 1, 0, 1, 1, 1]
+        maxcount = count =0
+        for i in range(len(lista)):
+            if lista[i] == 1:
+                count = count +1
+            else:
+                maxcount = max(maxcount,count)
+                count = 0
+        maxcount = max(maxcount,count)
+        print(maxcount)
+
+max_lianxu_one_num()
+
+
+#         lista = [1,1,0,1,0,1]
+#         maxcount = count = 0
+#         n = len(lista)
+#         for i in range(n):
+#             if lista[i] == 1:
+#                 count += 1
+#             else:
+#                 maxcount = max(maxcount,count)
+#                 count = 0
+#         maxcount = max(maxcount,count)
+#         print("最大连续数是：",maxcount)
+
+
+
 
 
 
@@ -679,250 +925,250 @@ def find_by_middle2(lista, left, right, x):
 # result = find_by_middle2(c,0,len(c)-1,d)
 # print(d,'在数组中的索引值是：',result)
 #
-merge_list2()
-list_insert2()
+# merge_list2()
+# list_insert2()
 
 
-import os
-
-
-class Test_High_Frequency:
-
-    def test_os(self):
-        """
-        os.path.join()函数：连接两个或更多的路径名组件
-               1.如果各组件名首字母不包含’/’，则函数会自动加上    win  home\dev\
-　　　　　　　　　2.如果有一个组件是一个绝对路径，则在它之前的所有组件均会被舍弃  win  /dev\
-　　　　　　　　　3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾   win  home\dev\
-        os.walk() 方法用于通过在目录树中游走输出在目录中的文件名，向上或者向下。
-    root 所指的是当前正在遍历的这个文件夹的本身的地址
-    dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
-    files 同样是 list , 内容是该文件夹中所有的文件(不包括子目录)
-    topdown --可选，为 True，则优先遍历 top 目录，否则优先遍历 top 的子目录(默认为true)。
-        :return:
-        """
-        path1 = 'home'
-        path2 = '/dev'
-        path3 = ''
-        path10 = path1+ path2 + path3
-        path20 = os.path.join(path1,path2,path3)
-        print(path10)
-        print(path20)
-        print(os.getcwd())
-
-        # for root, dirs, files in os.walk(".",topdown=False):
-        # E:\python_workspace\pytest_selenium_appium\pythontest\test1
-        for root, dirs, files in os.walk("E:\python_workspace\pytest_selenium_appium\pythontest\\test1", topdown=False):
-            print('root****'+ root)
-            print('dirs****' ,dirs)
-            print('files****' ,files)
-
-            for name in files:
-                print(os.path.join(root,name))
-            for name in dirs:
-                print(os.path.join(root,name))
-
-
-    def traverseFolder(self,path=""):
-        """
-        遍历实现文件夹中的文件
-        if 是文件夹：
-            if 不是空文件夹：
-                开始遍历
-            else:
-                是空文件夹
-        else:
-            不是文件夹，无法遍历
-        :return:
-        """
-
-        path = os.getcwd()
-        path = "E:\python_workspace\pytest_selenium_appium\pythontest2"
-        print(path)
-        if os.path.exists(path):
-            for root, dirs, files in os.walk(path):
-                for name in dirs:
-                    print(os.path.join(root,name))
-                for name in files:
-                    print(os.path.join(root,name))
-        else:
-            print("path 不存在")
-
-
-    def test_remove_sort(self):
-        """
-        s = "ajldjljfd"，去重并从小到大排序输出"adfjl"
-        :return:
-        """
-
-        s = "ajldjljfd"
-
-        # 方法1 去重连成字符串，然后转为list排序，再转为字符串
-        res = ''
-        #去重连成字符串
-        for i in range(len(s)):
-            if s[i] not in res:
-                res = res+s[i]
-        print(res)
-        #字符串转换为列表
-        list_res = list(res)
-        print(list_res)
-        #列表正序排列
-        list_res.sort()
-        print(list_res)
-        #去重后倒序排列
-        # list_res.sort(reverse=True)
-        # print(list_res)
-        #列表转换为字符串
-        str_res = ''.join(list_res)
-        print(str_res)
-
-        #方法2 用set先去掉重复元素，然后转为list排序，再转为字符串
-        # s_set = set(s)
-        # print(s_set)
-        # s_list = list(s_set)
-        # s_list.sort()
-        # print(s_list)
-        # str_res = ''.join(s_list)
-        # print(str_res)
-
-    def test_remove_sort2(self):
-        """
-        s = "ajldjljfd"，去重并从小到大排序输出"adfjl"
-        :return:
-        """
-
-        s = "ajldjljfd"
-
-        # 方法1 去重连成字符串，然后转为list排序，再转为字符串
-        res = ''
-        #去重连成字符串
-        for i in range(len(s)):
-            if s[i] not in res:
-                res = res+s[i]
-        print(res)
-
-
-    def test_samecharnum(self):
-        '''
-        需求：统计列表list1中元素3的个数，并返回每个元素的索引
-        list.count() 用于统计某个元素在列表中出现的次数。
-        list.index()  用于从列表中找出某个值第一个匹配项的索引位置。
-        :return:
-        '''
-        list1 = [3, 5, 8, 9, 2, 10, 6, 2, 8, 3, 4, 5, 5, 4, 1, 3, 9, 7, 10, 2]
-        count = list1.count(3)
-        print(count)
-        index_list = []
-        index = -1
-
-        # 通过list.index()方法的__start参数，指定起始索引
-        for i in range(0, count):
-            print('iiiiiiiiii',i)
-            print(index)
-            index = list1.index(3, index + 1)
-            print(index)
-            index_list.append(index)
-
-        print(index_list)
-
-    def test_samecharnum2(self):
-        list1 = [3, 5, 8, 9, 2, 10, 6, 2, 8, 3, 4, 5, 5, 4, 1, 3, 9, 7, 10, 2]
-        len_list = len(list1)
-        list_index = []
-        num = 0
-        for i in range(len_list):
-            if list1[i] == 3:
-                num += 1
-                list_index.append(i)
-        print(f"list1中3出现的次数是：{num}")
-        print("他的索引是：")
-        print(list_index)
-
-    def test_samcechar(self):
-        """
-        整数数组中只有一个元素出现了一次，其他元素都出现了2次或者更多次，找出这个只出现了一次的元素
-        :return:
-        """
-        list1 = [3, 5, 3, 9, 5, 5]
-        a = {}
-        for i in list1:
-            a[i] = list1.count(i)
-            # print(a)
-            if list1.count(i) == 1:
-                print("只出现了一次的元素是：",i)
-        print(a)
-
-    def test_samcechar2(self):
-        """
-        整数数组中只有一个元素出现了一次，其他元素都出现了2次或者更多次，找出这个只出现了一次的元素
-        :return:
-        """
-        list1 = [3, 5, 3, 9, 5, 5]
-        num=0
-        dic={}
-        list1.sort()
-        print(list1)
-
-
-
-
-    def test_samchar3(self):
-        """
-        找出数组中重复的数字
-        在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
-        :return:
-        """
-        nums = [1,2,3,1,1,2]
-        repeatdict = {}
-        for i in nums:
-            print(i)
-            if i not in repeatdict:
-                repeatdict[i] = 1
-                print('没有重复数')
-            else:
-                print('重复数是',i)
-
-        print(repeatdict)
-
-
-
-
-
-
-
-
-
-    def test_max_lianxu_num(self):
-        """
-        最大连续1的个数
-        :return:
-        """
-        lista = [1,1,0,1,0,1]
-        maxcount = count = 0
-        n = len(lista)
-        for i in range(n):
-            if lista[i] == 1:
-                count += 1
-            else:
-                maxcount = max(maxcount,count)
-                count = 0
-        maxcount = max(maxcount,count)
-        print("最大连续数是：",maxcount)
-
-
-    def test_max_lianxu_num2(self):
-        lista = [1,1,0,1,0,1,1,1]
-        maxcount = count = index = 0
-        n = len(lista)
-        while index < n:
-            if lista[index] == 1:
-                count += 1
-            else:
-                maxcount = max(maxcount,count)
-                count = 0
-            index += 1
-
-        maxcount = max(maxcount,count)
-        print("最大连续数是：",maxcount)
-
+# import os
+#
+#
+# class Test_High_Frequency:
+#
+#     def test_os(self):
+#         """
+#         os.path.join()函数：连接两个或更多的路径名组件
+#                1.如果各组件名首字母不包含’/’，则函数会自动加上    win  home\dev\
+# 　　　　　　　　　2.如果有一个组件是一个绝对路径，则在它之前的所有组件均会被舍弃  win  /dev\
+# 　　　　　　　　　3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾   win  home\dev\
+#         os.walk() 方法用于通过在目录树中游走输出在目录中的文件名，向上或者向下。
+#     root 所指的是当前正在遍历的这个文件夹的本身的地址
+#     dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
+#     files 同样是 list , 内容是该文件夹中所有的文件(不包括子目录)
+#     topdown --可选，为 True，则优先遍历 top 目录，否则优先遍历 top 的子目录(默认为true)。
+#         :return:
+#         """
+#         path1 = 'home'
+#         path2 = '/dev'
+#         path3 = ''
+#         path10 = path1+ path2 + path3
+#         path20 = os.path.join(path1,path2,path3)
+#         print(path10)
+#         print(path20)
+#         print(os.getcwd())
+#
+#         # for root, dirs, files in os.walk(".",topdown=False):
+#         # E:\python_workspace\pytest_selenium_appium\pythontest\test1
+#         for root, dirs, files in os.walk("E:\python_workspace\pytest_selenium_appium\pythontest\\test1", topdown=False):
+#             print('root****'+ root)
+#             print('dirs****' ,dirs)
+#             print('files****' ,files)
+#
+#             for name in files:
+#                 print(os.path.join(root,name))
+#             for name in dirs:
+#                 print(os.path.join(root,name))
+#
+#
+#     def traverseFolder(self,path=""):
+#         """
+#         遍历实现文件夹中的文件
+#         if 是文件夹：
+#             if 不是空文件夹：
+#                 开始遍历
+#             else:
+#                 是空文件夹
+#         else:
+#             不是文件夹，无法遍历
+#         :return:
+#         """
+#
+#         path = os.getcwd()
+#         path = "E:\python_workspace\pytest_selenium_appium\pythontest2"
+#         print(path)
+#         if os.path.exists(path):
+#             for root, dirs, files in os.walk(path):
+#                 for name in dirs:
+#                     print(os.path.join(root,name))
+#                 for name in files:
+#                     print(os.path.join(root,name))
+#         else:
+#             print("path 不存在")
+#
+#
+#     def test_remove_sort(self):
+#         """
+#         s = "ajldjljfd"，去重并从小到大排序输出"adfjl"
+#         :return:
+#         """
+#
+#         s = "ajldjljfd"
+#
+#         # 方法1 去重连成字符串，然后转为list排序，再转为字符串
+#         res = ''
+#         #去重连成字符串
+#         for i in range(len(s)):
+#             if s[i] not in res:
+#                 res = res+s[i]
+#         print(res)
+#         #字符串转换为列表
+#         list_res = list(res)
+#         print(list_res)
+#         #列表正序排列
+#         list_res.sort()
+#         print(list_res)
+#         #去重后倒序排列
+#         # list_res.sort(reverse=True)
+#         # print(list_res)
+#         #列表转换为字符串
+#         str_res = ''.join(list_res)
+#         print(str_res)
+#
+#         #方法2 用set先去掉重复元素，然后转为list排序，再转为字符串
+#         # s_set = set(s)
+#         # print(s_set)
+#         # s_list = list(s_set)
+#         # s_list.sort()
+#         # print(s_list)
+#         # str_res = ''.join(s_list)
+#         # print(str_res)
+#
+#     def test_remove_sort2(self):
+#         """
+#         s = "ajldjljfd"，去重并从小到大排序输出"adfjl"
+#         :return:
+#         """
+#
+#         s = "ajldjljfd"
+#
+#         # 方法1 去重连成字符串，然后转为list排序，再转为字符串
+#         res = ''
+#         #去重连成字符串
+#         for i in range(len(s)):
+#             if s[i] not in res:
+#                 res = res+s[i]
+#         print(res)
+#
+#
+#     def test_samecharnum(self):
+#         '''
+#         需求：统计列表list1中元素3的个数，并返回每个元素的索引
+#         list.count() 用于统计某个元素在列表中出现的次数。
+#         list.index()  用于从列表中找出某个值第一个匹配项的索引位置。
+#         :return:
+#         '''
+#         list1 = [3, 5, 8, 9, 2, 10, 6, 2, 8, 3, 4, 5, 5, 4, 1, 3, 9, 7, 10, 2]
+#         count = list1.count(3)
+#         print(count)
+#         index_list = []
+#         index = -1
+#
+#         # 通过list.index()方法的__start参数，指定起始索引
+#         for i in range(0, count):
+#             print('iiiiiiiiii',i)
+#             print(index)
+#             index = list1.index(3, index + 1)
+#             print(index)
+#             index_list.append(index)
+#
+#         print(index_list)
+#
+#     def test_samecharnum2(self):
+#         list1 = [3, 5, 8, 9, 2, 10, 6, 2, 8, 3, 4, 5, 5, 4, 1, 3, 9, 7, 10, 2]
+#         len_list = len(list1)
+#         list_index = []
+#         num = 0
+#         for i in range(len_list):
+#             if list1[i] == 3:
+#                 num += 1
+#                 list_index.append(i)
+#         print(f"list1中3出现的次数是：{num}")
+#         print("他的索引是：")
+#         print(list_index)
+#
+#     def test_samcechar(self):
+#         """
+#         整数数组中只有一个元素出现了一次，其他元素都出现了2次或者更多次，找出这个只出现了一次的元素
+#         :return:
+#         """
+#         list1 = [3, 5, 3, 9, 5, 5]
+#         a = {}
+#         for i in list1:
+#             a[i] = list1.count(i)
+#             # print(a)
+#             if list1.count(i) == 1:
+#                 print("只出现了一次的元素是：",i)
+#         print(a)
+#
+#     def test_samcechar2(self):
+#         """
+#         整数数组中只有一个元素出现了一次，其他元素都出现了2次或者更多次，找出这个只出现了一次的元素
+#         :return:
+#         """
+#         list1 = [3, 5, 3, 9, 5, 5]
+#         num=0
+#         dic={}
+#         list1.sort()
+#         print(list1)
+#
+#
+#
+#
+#     def test_samchar3(self):
+#         """
+#         找出数组中重复的数字
+#         在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+#         :return:
+#         """
+#         nums = [1,2,3,1,1,2]
+#         repeatdict = {}
+#         for i in nums:
+#             print(i)
+#             if i not in repeatdict:
+#                 repeatdict[i] = 1
+#                 print('没有重复数')
+#             else:
+#                 print('重复数是',i)
+#
+#         print(repeatdict)
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#     def test_max_lianxu_num(self):
+#         """
+#         最大连续1的个数
+#         :return:
+#         """
+#         lista = [1,1,0,1,0,1]
+#         maxcount = count = 0
+#         n = len(lista)
+#         for i in range(n):
+#             if lista[i] == 1:
+#                 count += 1
+#             else:
+#                 maxcount = max(maxcount,count)
+#                 count = 0
+#         maxcount = max(maxcount,count)
+#         print("最大连续数是：",maxcount)
+#
+#
+#     def test_max_lianxu_num2(self):
+#         lista = [1,1,0,1,0,1,1,1]
+#         maxcount = count = index = 0
+#         n = len(lista)
+#         while index < n:
+#             if lista[index] == 1:
+#                 count += 1
+#             else:
+#                 maxcount = max(maxcount,count)
+#                 count = 0
+#             index += 1
+#
+#         maxcount = max(maxcount,count)
+#         print("最大连续数是：",maxcount)
+#
