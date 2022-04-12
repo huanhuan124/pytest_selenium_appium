@@ -1,3 +1,9 @@
+import json
+import os.path
+from itertools import permutations
+
+import yaml
+
 
 def kuohaopiei(x):
     '''
@@ -628,8 +634,8 @@ def quicksort(nums):
 
 
 
-nums = [4,1,2,3,8]
-print(quicksort(nums))
+# nums = [4,1,2,3,8]
+# print(quicksort(nums))
 
 
 
@@ -665,9 +671,9 @@ def maopaosort(nums):
             if nums[i]>nums[j]:
                 nums[j],nums[i] = nums[i],nums[j]
     return nums
-nums = [1,4,2,3,8]
-# print(maopaosort(nums))
-selectsort(nums)
+# nums = [1,4,2,3,8]
+# # print(maopaosort(nums))
+# selectsort(nums)
 
 
 def list_insert_new(arr,n):
@@ -686,14 +692,141 @@ def list_insert_new(arr,n):
     print(arr)
 
 
-arr = [1, 3, 3, 4, 6, 10]
-n = 11
-list_insert_new(arr,n)
+# arr = [1, 3, 3, 4, 6, 10]
+# n = 11
+# list_insert_new(arr,n)
+
+def quicksort2(la):
+
+
+    less = []
+    more = []
+    middle = []
+    n = len(la)
+
+    if n<=1:
+        return la
+
+    p= la[0]
+    for i in la:
+        if i < p:
+            less.append(i)
+        elif i > p:
+            more.append(i)
+        else:
+            middle.append(i)
+    less = quicksort2(less)
+    more = quicksort2(more)
+    return less+middle+more
+
+# print('---快速排序---')
+# la = [2,1,5,9,8]
+# print(quicksort2(la))
 
 
 
+def listcontaindict_sort(la):
+    """
+    请按照age或者name升序排序
+    la = [{'name':'Lily','age':30},{'name':'Tom','age':20},{'name':'Jim','age':28}
+      ,{'name':'Fish','age':22},{'name':'Rabbit','age':38}]
+    输出：
+    [{'name': 'Tom', 'age': 20}, {'name': 'Fish', 'age': 22}, {'name': 'Jim', 'age': 28}, {'name': 'Lily', 'age': 30}, {'name': 'Rabbit', 'age': 38}]
+    :return:
+    """
+    # 快速排序
+    # less = []
+    # more = []
+    # middle = []
+    #
+    # n = len(la)
+    # if n<=1:
+    #     return la
+    #
+    # p = la[0]['age']
+    # print(p)
+    # for x in la:
+    #     if x['age'] < p:
+    #         less.append(x)
+    #     elif x['age'] >p:
+    #         more.append(x)
+    #     else:
+    #         middle.append(x)
+    # less = listcontaindict_sort(less)
+    # more = listcontaindict_sort(more)
+    #
+    # return less+middle+more
+
+#     冒泡排序
+    for x in range(len(la)):
+        for y in range(1,len(la)-x):
+            if la[y]['age'] < la[y-1]['age']:
+                la[y],la[y-1] = la[y-1],la[y]
+        # print(la)
+    return la
 
 
+# la = [{'name':'Lily','age':30},{'name':'Tom','age':20},{'name':'Jim','age':48}
+#       ,{'name':'Fish','age':22},{'name':'Rabbit','age':38}]
+# print(listcontaindict_sort(la))
+
+
+def count_file_content(filenamepath):
+    # 统计一共有几行
+    # 统计一共有多少个字符
+    # 统计一个有多少个大写字母，数字，小写字母
+    c = 0
+    d = 0
+    lowerc = 0
+    uppperc = 0
+    num = 0
+    with open(filenamepath,'r') as f:
+        for line in f:
+            c = c+1
+            # 需要去掉尾部的换行符
+            for i in line.strip():
+                print(i)
+                d = d+1
+                if i.isupper():
+                    uppperc = uppperc + 1
+                elif i.islower():
+                    lowerc = lowerc + 1
+                elif i.isdigit():
+                    num = num + 1
+
+
+    print(f"一共有{c}行")
+    print(f"一共有{d}个字符")
+    print(f"一共有{uppperc}个大写字母")
+    print(f"一共有{lowerc}个小写字母")
+    print(f"一共有{num}个数字")
+
+
+# filename = 'test1.txt'
+# filenamepath = os.path.abspath(__file__+f'/../data/{filename}')
+# print(filenamepath)
+# count_file_content(filenamepath)
+
+def list_insert3(arr,n):
+    """
+    #把一个数字插入到有序数组中，使他仍然有序
+    #注意：考虑数大于数组中的所有数的情况，此时，需要把数插入到数组的最后
+    arr1 = [1, 3, 4, 6, 10]
+    :return:
+    """
+    for i in range(len(arr)):
+        if n <=arr[i]:
+            arr.insert(i,n)
+            break
+
+    if i == len(arr)-1:
+        arr.insert(i+1,n)
+    print(arr)
+
+
+arr = [1, 3, 4, 6, 10]
+n = 10
+list_insert3(arr,n)
 
 
 
@@ -806,7 +939,7 @@ def merge_list2():
 
 
 
-print("~~~~~~~~~~~~~~~~~~~~给定一个数字，利用二分查找，找出他在有序数组中的索引~~~~~~~~~~~~~~~~~~~~")
+# print("~~~~~~~~~~~~~~~~~~~~给定一个数字，利用二分查找，找出他在有序数组中的索引~~~~~~~~~~~~~~~~~~~~")
 #查找一个元素在一个有序数组中的索引，利用递归
 def find_by_middle(lista, left, right, x):
     middle = (left+right)//2
@@ -855,7 +988,7 @@ def remove_repeat_char_sort():
         resnew = ''.join(res)
         print(resnew)
 
-remove_repeat_char_sort()
+# remove_repeat_char_sort()
 
 def repeatchar():
         """
@@ -879,7 +1012,7 @@ def repeatchar():
         #         return i
 
 
-print(repeatchar())
+# print(repeatchar())
 
 
 def max_lianxu_one_num():
@@ -898,7 +1031,573 @@ def max_lianxu_one_num():
         maxcount = max(maxcount,count)
         print(maxcount)
 
-max_lianxu_one_num()
+
+
+
+def tongji_capital_char(filename):
+    """
+    统计文件中有多少个大写字符
+    :return:
+    """
+    c,d,e = 0,0,0
+    with open(filename,'r') as f:
+
+        for line in f:
+            print(line)
+            for i in line.strip():
+                e = e+1
+                if i.isupper():
+                    c = c +1
+                if i.isdigit():
+                    d = d+1
+        print(f"总共有{e}个字符，数字有{d}个，大写字母有{c}个")
+        if c+d == e:
+            print("文件全部由大写字母和数字组成")
+        else:
+            print("文件不是全部由大写字母和数字组成")
+        return c
+
+
+# filename = os.path.abspath(__file__)+"/../data/test1.txt"
+# filename = os.path.abspath(__file__)+"/../test2.txt"
+# print(filename)
+# print(tongji_capital_char(filename))
+# # ord对应字符的acsii码
+# print(ord('Z'))
+
+def file_xiangguan(filename):
+    """
+
+    :param filename:
+    :return:
+    """
+    # 读取文件
+    # p_string = ''
+    # with open(filename,'r') as f:
+    #     # 返回一个列表，每行是一个元素
+    #     lines = f.readlines()
+    #     # print(lines)
+    #     # print(type(lines))
+    #     for line in lines:
+    #         x = line.strip()
+    #         p_string += x
+    #     print(p_string)
+    #
+    #     c = 0
+    #     for i in p_string:
+    #         if i >= chr(65) and i<=chr(65+26):
+    #             c = c+1
+    #     return c
+
+#  写文件
+    with open(filename,'w') as f:
+        f.write('12332')
+
+
+
+
+
+
+# filename = "test2.txt"
+# print(file_xiangguan(filename))
+
+
+def file_yaml(filename):
+    """
+
+    :param filename:
+    :return:
+    """
+    # 读取yaml文件中的内容
+    with open(filename,'r') as f:
+        x = yaml.safe_load(f)
+        print(x)
+        print(type(x))
+    # 把内容写入到yaml文件中。    a追加，w覆盖写入
+    with open(filename,'a') as f1:
+        yaml.safe_dump('11111',f1)
+
+# filename = "testyaml.yml"
+# file_yaml(filename)
+
+def json_file(filename):
+    # 以json方式读取文件，文件中如果是json串必须用双引号
+    with open(filename,'r') as f:
+        x = json.load(f)
+        print(x)
+        print(type(x))
+
+    # 把json串写入文件，如果是json串最好用双引号，虽然单引号也不报错
+    data = {'name':'yiyi','age':12}
+    with open(filename,'w') as f2:
+        json.dump(data,f2)
+
+# filename = "testjson.txt"
+# json_file(filename)
+
+def json_str():
+    # json.dumps(data) 把dict转换为json字符串
+    # data = {"name": "yiyi", "sex": "female","prename": "erer", "age": 20}
+    # data = {'name': 'yiyi', 'sex': 'female', 'prename': 'erer', 'age': 20}
+    # c = json.dumps(data)
+    # print(c)
+    # print(type(c))
+
+    # 把字符串转为dict
+    data = '{"name": "yiyi", "sex": "female", "prename": "erer", "age": 20}'
+    dc = json.loads(data)
+    print(dc)
+    print(type(dc))
+#
+# json_str()
+
+def list_dict_sort(lista):
+    """
+    一个列表中包含多个字典，根据age的值排序
+    lista = [{'name':'Homer','age':39},{'name':'Bart','age':10}]
+    :param lista:
+    :return:
+    """
+    # lista = [{'name': 'Homer', 'age': 39}, {'name': 'Bart', 'age': 90},
+    #         {'name': 'Jim', 'age': 70}, {'name': 'Tom', 'age': 80}]
+    # print(lista)
+    # # 按照name升序排序，倒序需要加参数reverse=True
+    # list_name = sorted(lista,key=lambda x:x['name'],reverse=True)
+    # print(list_name)
+    # #     按照age排序
+    # list_age = sorted(lista,key=lambda x:x['age'])
+    # print(list_age)
+
+    # #     快速排序，按照age的升序排序，如果按照name排序，就把age改成name
+    # if len(lista)==0:
+    #     return []
+    # elif len(lista)==1:
+    #     return lista
+    #
+    # mid = lista[0]['age']
+    # left =[]
+    # right = []
+    # for x in lista[1:]:
+    #     print(x)
+    #     if x['age'] < mid:
+    #         left.append(x)
+    #     else:
+    #         right.append(x)
+    # return list_dict_sort(left) + [lista[0]] + list_dict_sort(right)
+
+    # 快速排序，按照age的升序排序，如果按照name排序，就把age改成name
+    # left = []
+    # right = []
+    # mid = []
+    # n = len(lista)
+    # if n <= 1:
+    #     return lista
+    # else:
+    #     p = lista[0]['name']
+    #     print(p)
+    #     for x in lista:
+    #         print(x)
+    #         if x['name'] < p:
+    #             left.append(x)
+    #         elif x['name']>p:
+    #             right.append(x)
+    #         else:
+    #             mid.append(x)
+    #     left = list_dict_sort(left)
+    #     right = list_dict_sort(right)
+    # return left + mid + right
+
+    # 冒泡排序，按照age的升序排序，如果按照name排序，就把age改成name
+    # n = len(lista)
+    # for i in range(n):
+    #     for j in range(1,n-i):
+    #         if lista[j-1]['age'] > lista[j]['age']:
+    #             lista[j - 1],lista[j] = lista[j],lista[j - 1]
+    # return lista
+
+    # 选择排序，按照age的升序排序，如果按照name排序，就把age改成name
+    # n = len(lista)
+    # for i in range(n):
+    #     min = i
+    #     for j in range(i+1,n):
+    #         if lista[j]['age'] < lista[min]['age']:
+    #             lista[j],lista[min] = lista[min],lista[j]
+    # return lista
+
+
+    # print(lista)
+    # # 按照age值排序
+    # listnew = sorted(lista, key=lambda x: x['age'])
+    # # 按照age值排序
+    # listnew = sorted(lista, key=lambda x: x['name'])
+    # print(listnew)
+    # print(lista)
+    #
+    # s = {'f':1,'e':3,'a':0,'d':1}
+    # skey = sorted(s.items(),key=lambda  x:x[0])
+    # svalue = sorted(s.items(),key=lambda x:x[1])
+    # print(skey)
+    # print(svalue)
+
+#     快速排序
+
+    # less =[]
+    # more =[]
+    # middle =[]
+    # n = len(lista)
+    #
+    # if n<=1:
+    #     return lista
+    # else:
+    #     p = lista[0]['age']
+    #     for x in lista:
+    #         if x['age']<p:
+    #             less.append(x)
+    #         elif x['age'] > p:
+    #             more.append(x)
+    #         else:
+    #             middle.append(x)
+    #     less = list_dict_sort(less)
+    #     more = list_dict_sort(more)
+    # return less+middle+more
+
+# #     冒泡排序
+#     for i in range(len(lista)):
+#         for j in range(1,len(lista)-i):
+#             if lista[j-1]['age'] > lista[j]['age']:
+#                 lista[j-1],lista[j] = lista[j],lista[j-1]
+#     return lista
+
+#     选择排序
+
+    # for i in range(len(lista)):
+    #     min = i
+    #     for j in range(i+1,len(lista)):
+    #         if lista[j]['age']<lista[min]['age']:
+    #             lista[j],lista[min] = lista[min],lista[j]
+    # return lista
+
+
+
+
+
+
+
+def dictionairy():
+    # 声明字典
+    key_value = {}
+
+    # 初始化
+    key_value[2] = 56
+    key_value[10] = 2
+    key_value[5] = 12
+    key_value[8] = 24
+    key_value[6] = 18
+    key_value[3] = 323
+    # {2: 56, 10: 2, 5: 12, 8: 24, 6: 18, 3: 323}
+    print(key_value)
+    # print("按键(key)排序:")
+
+    print(key_value.items())
+    # 按键升序排列  [(2, 56), (3, 323), (5, 12), (6, 18), (8, 24), (10, 2)]
+    print(sorted(key_value.items(), key=lambda asd: asd[0]))
+    # 按值升序排列   [(10, 2), (5, 12), (6, 18), (8, 24), (2, 56), (3, 323)]
+    print(sorted(key_value.items(), key=lambda asd: asd[1]))
+
+    # 遍历字典
+    for k in key_value.keys():
+        print(k)
+    for v in key_value.values():
+        print(v)
+    for k,v in key_value.items():
+        print(k,v)
+
+
+    print("====字典中包含字典")
+    # 字典中再包含字典
+    a = {'a': {'val': 3}, 'f': {'val': 4}, 'c': {'val': 1}, 'd': {'val2': 0}}
+    print(a)
+    # 按照字典的值排序
+    print(sorted(a.items(), key=lambda asd: asd[1].get('val',0)))
+
+
+
+
+
+
+
+
+    # sorted(key_value)
+    # print(sorted(key_value))
+    # print(key_value)
+    # for i in sorted(key_value):
+    #     print((i,key_value[i]))
+
+
+# dictionairy()
+lista = [{'name': 'Homer', 'age': 99}, {'name': 'Bart', 'age': 90},
+            {'name': 'Jim', 'age': 70}, {'name': 'Tom', 'age': 80}]
+# print(list_dict_sort(lista))
+
+
+def two_list_trans():
+    tl = [[1,2,3],[4,5,6]]
+    tlen = len(tl)
+    clen = len(tl[0])
+    res = []
+    for i in range(clen):
+        m = []
+        for j in range(tlen):
+            m.append(tl[j][i])
+        res.append(m)
+    print(res)
+
+# two_list_trans()
+
+def dic_key_value_trans():
+    """
+    示例
+    输入：{'Ice': 'Cream', 'Age': '21', 'Light': 'Cream', 'Double': 'Cream'}，
+    输出：{'Cream': ['Ice', 'Double', 'Light'], '21': ['Age']}
+    :return:
+    """
+    dc = {'Ice': 'Cream', 'Age': '21', 'Light': 'Cream', 'Double': 'Cream'}
+    # print(dc['Ice'])
+    dcnew = {}
+    m=[]
+    for k,v in dc.items():
+        if dcnew.get(v):
+            if type(dcnew.get(v)) == list:
+                dcnew.get(v).append(k)
+            else:
+                m.append(dcnew.get(v))
+                m.append(k)
+                dcnew[v] = m
+
+        else:
+            dcnew[v] = k
+
+    print(dcnew)
+
+# dic_key_value_trans()
+
+def dic_key_value_trans2():
+    """
+    输入：{'Cream': ['Ice', 'Light', 'Double'], '21': 'Age'}
+    输出：{'Ice': 'Cream', 'Age': '21', 'Light': 'Cream', 'Double': 'Cream'}
+    :return:
+    """
+    dc = {'Cream': ['Ice', 'Light', 'Double'], '21': 'Age'}
+    tempdic = {}
+    for k,v in dc.items():
+        # print(v)
+        # print(dc.get(k))
+        # print(isinstance(v, list))
+        # isinstance(object, classinfo)
+        if isinstance(v, list):
+            for x in v:
+                tempdic[x] = k
+        else:
+            tempdic[v] = k
+    print(tempdic)
+
+# dic_key_value_trans2()
+
+def norepeat_max_zichuan():
+    """
+    abcb
+    abcdefgccab
+
+    给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+
+    示例 1:
+
+    输入: s = "abcabcbb"
+    输出: 3
+    解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+    示例 2:
+
+    输入: s = "bbbbb"
+    输出: 1
+    解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+    示例 3:
+
+    输入: s = "pwwkew"
+    输出: 3
+    解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+
+    请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+    示例 4:
+
+    输入: s = ""
+    输出: 0
+
+    :return:
+    """
+    # 使用暴力破解算出无重复最长子串
+    # s = "abcvde"
+
+    # maxcount = 0
+    # for i in range(len(s)):
+    #     templist = []
+    #     c = 0
+    #     for j in range(i,len(s)):
+    #         print('当前字符：'+s[j])
+    #         if s[j] in templist:
+    #             print('字符存在，结束内循环')
+    #             break
+    #         else:
+    #             templist.append(s[j])
+    #             c = c + 1
+    #             print(templist,c)
+    #
+    #     maxcount = max(maxcount,c)
+    # print(maxcount)
+
+    # 利用滑动窗口，算出最大无重复最长子串
+    ans = 0
+    start = 0
+    tempd = {}
+    # s = "abcdccab"
+    s = "pwwkew"
+    for i ,c in enumerate(s):
+        if c in tempd:
+            start = max(start,tempd[c]+1)
+            # start = tempd[c] + 1
+            # print(f'当前start是：{start}')
+        tempd[c] = i
+        # print(i, c, start)
+        ans = max(ans,i-start+1)
+        # print(tempd)
+        # print(f'当前最长无重复子串是：{ans}')
+    return ans
+
+
+# print('最长无重复子串')
+# print(norepeat_max_zichuan())
+
+
+def norepeat_max_zichuan_and_index():
+    # s = "abcdccab"
+    s = "pwwkew"
+    # s = "bbb"
+    # s = "abcd"
+    dic = {}
+    start,ans = 0,0
+    left,right = 0,0
+    for i,c in enumerate(s):
+        if c in dic:
+            start = max(start,dic[c]+1)
+        dic[c]=i
+        if ans<i-start+1:
+            ans = i-start+1
+            # left,right = start,i+1
+            left,right = start,i
+    return [ans,(left,right)]
+
+
+# print(norepeat_max_zichuan_and_index())
+
+def fun_emumerate():
+    # tmplist = ['a','b','c','d']
+    # for i,c in enumerate(tmplist):
+    #     print(i,c)
+    #
+    filename = os.path.abspath(__file__)+"/../data/test1.txt"
+    print(filename)
+    count = 0
+    # 统计文件中一共有多少行
+    # for i ,c in enumerate(open(filename,'r')):
+    #     print(i,c)
+    #     count = count+1
+    # print(count)
+
+    # 统计文件中一共有多少行
+    # count = len(open(filename,'r').readlines())
+    # print(count)
+
+    # 统计文件中一共有多少行
+    with open(filename,'r') as f:
+        for line in f:
+            count = count+1
+    print(count)
+
+    # 把字符串的每个字符和下标对应的放到字典中
+    s = 'abcdef'
+    tmpd = {}
+    for i,c in enumerate(s):
+        # print(i,c)
+        tmpd[c] = i
+    print(tmpd)
+    # if 'a' in tmpd.keys():
+    if 'a' in tmpd:
+        print('a在字典中')
+
+# fun_emumerate()
+
+def max_fivexianglianshu():
+    """
+    给定一个字符串格式的数字，请编写一个函数，找出所有5个相连数字中最大的数字。
+    示例：
+    输入： "1234567890"
+    输出：67890
+    :return:
+    """
+
+    s = "1234567890"
+    s = "1234567898765"
+    s = "731674765"
+    maxnum = 0
+    for i in range(len(s)-4):
+        num = s[i:i+5]
+        print(num)
+        maxnum = max(maxnum,int(num))
+    print(maxnum)
+
+# max_fivexianglianshu()
+
+
+def next_bigger():
+    """
+    给定一个正整数，请编写一个函数，将它的所有数字重新组合，找出刚好比它大一点儿的那个数字。
+    实例：
+    输入：12，返回：21
+    输入：513，返回：531
+    输入：144，返回：414
+    题目难度：中等
+    :return:
+    """
+    s = 513
+    s = 144
+    s = 12
+    list_s = [i for i in str(s)]
+    print(list_s)
+    data = []
+    for x in permutations(list_s):
+        print(x)
+        y = int(''.join(x))
+        data.append(y)
+    print(data)
+    data.sort()
+    print(data)
+
+    for i in data:
+        if s<i:
+            print(i)
+            return i
+
+
+
+
+
+
+
+
+
+next_bigger()
+
+
+# max_lianxu_one_num()
 
 
 #         lista = [1,1,0,1,0,1]
