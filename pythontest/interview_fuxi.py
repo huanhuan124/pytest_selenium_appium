@@ -1586,15 +1586,21 @@ def next_bigger():
             print(i)
             return i
 
+def next_bigger2():
+    n = 513
+    nums = list(str(n))
+    nums.reverse()
+    for i in range(len(nums)):
+        if nums[i] > nums[i + 1]:
+            temp = nums[i + 1]
+            nums[i + 1] = nums[i]
+            nums[i] = temp
+            break
+    nums.reverse()
+    return int(''.join(nums))
 
 
-
-
-
-
-
-
-next_bigger()
+print(next_bigger2())
 
 
 # max_lianxu_one_num()
