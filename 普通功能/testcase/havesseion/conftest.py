@@ -11,11 +11,11 @@ session =  requests.session()
 #         "loginId": "UA244Y8SbzJRKNVluixyKA==",
 #         "password": "qLpmhT5PIxYdFCh/kZ+dcw=="
 #     }
-#     url = "http://caradmintest.zuche.com/system/login.do_"
+#     url = "http://*"
 #     header = {"Connection": "close"}
 #     re = request_test(url, "POST", data, header)
 #
-#     # re = requests.post("http://caradmintest.zuche.com/system/login.do_", data=data)
+#     # re = requests.post("http://*", data=data)
 #     # print("login接口返回的结果：")
 #     # print(re.text)
 #     # # print(re.headers)
@@ -33,10 +33,10 @@ def login_do_session():
         "loginId": "UA244Y8SbzJRKNVluixyKA==",
         "password": "qLpmhT5PIxYdFCh/kZ+dcw=="
     }
-    url = "http://caradmintest.zuche.com/system/login.do_"
+    url = "http://*"
     re = request_test_session(url, method="POST",data = data)
 
-    # re = requests.post("http://caradmintest.zuche.com/system/login.do_", data=data)
+    # re = requests.post("http://*, data=data)
     # print("login接口返回的结果：")
     # print(re.text)
     # # print(re.headers)
