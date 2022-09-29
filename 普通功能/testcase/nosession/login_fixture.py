@@ -152,10 +152,12 @@ def test_createVehicle(login_do):
 
     # 当参数是json格式的时候，需要使用json格式传参，不能使用data
     # re = requests.post(
-    #     "http://carvmscoretest.zuche.com/carvmscore/vehiclemanage/readyrun/vehicleReadyRunVueController/createVehicle.do_",
+    #     "http://",
     #     json=mydata, headers=head)
 
-    re = requests.post("http://carvmscoretest.zuche.com/carvmscore/vehiclemanage/readyrun/vehicleReadyRunVueController/createVehicle.do_",
+    re = requests.post("http://
+                       
+                       ",
                                 json=mydata, headers=head)
     print(re.text)
     assert 200 == re.status_code
