@@ -147,7 +147,7 @@ def test_createVehicle_session(login_do_session):
 
     # 当参数是json格式的时候，需要使用json格式传参，不能使用data
     re = session.post(
-        "http://carvmscoretest.zuche.com/carvmscore/vehiclemanage/readyrun/vehicleReadyRunVueController/createVehicle.do_",
+        "http://**",
         json=mydata)
     print(re.text)
     assert 200 == re.status_code
