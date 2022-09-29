@@ -9,7 +9,7 @@ class login_demo:
             "loginId": "UA244Y8SbzJRKNVluixyKA==",
             "password": "qLpmhT5PIxYdFCh/kZ+dcw=="
         }
-        re = requests.post("http://caradmintest.zuche.com/system/login.do_", data=data)
+        re = requests.post("http:/**/**/login.do_", data=data)
         print("login接口返回的结果：")
         print(re.text)
         # print(re.headers)
@@ -169,7 +169,7 @@ class login_demo:
 
         # 当参数是json格式的时候，需要使用json格式传参，不能使用data
         re = requests.post(
-            "http://carvmscoretest.zuche.com/carvmscore/vehiclemanage/readyrun/vehicleReadyRunVueController/createVehicle.do_",
+            "http://**",
             json=mydata, headers=head)
         print(re.text)
 
