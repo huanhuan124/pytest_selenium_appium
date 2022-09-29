@@ -11,7 +11,7 @@ def login_do():
     "loginId": "HYhLuyvEoBNfYk2Tt7u27Q==",
     "password": "r5wA9Eu7SML/wxmAewlekA=="
     }
-    re=requests.post("http://caradminpre.zuche.com/system/login.do_",data=data)
+    re=requests.post("http://**/login.do_",data=data)
     # print(re.headers)
     setcookie=re.headers['Set-Cookie'].split(";")[0]
     # print(re.headers['Set-Cookie'].split(";")[0])
@@ -20,12 +20,8 @@ def login_do():
 # setcookie = login_do()
 
 #.新建准运营车辆
-# http://carvmscoretest.zuche.com/carvmscore/vehiclemanage/readyrun/vehicleReadyRunVueController/createVehicle.do_
-# "Content-Type":"application/json;charset=UTF-8",
-# "Origin":"http://carvmscoretest.zuche.com",
-# "Referer":"http://carvmscoretest.zuche.com/",
-# "Accept-Encoding":"gzip, deflate",
-# "Accept-Language":"zh-CN,zh;q=0.9",
+# http://**
+
 frameNo=""
 engineNo=""
 # 预生产环境创建车辆
@@ -282,7 +278,7 @@ def createVehicle(frameNo,engineNo,setcookie):
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
     }
     #当参数是json格式的时候，需要使用json格式传参，不能使用data
-    re = requests.post("http://carvmscorepre.zuche.com/carvmscore/vehiclemanage/readyrun/vehicleReadyRunVueController/createVehicle.do_", json=mydata, headers=head)
+    re = requests.post("http://**", json=mydata, headers=head)
     print(re.text)
 
 # createVehicle()
@@ -294,7 +290,7 @@ python中使用openpyxl模块时报错： File is not a zip file。
 '''
 #参数化方式批量创建车辆
 def createcarsbyexcel():
-    filepath="/Users/liangyunli/E盘资料/Python/workspace/old/2021111401新建车辆.xlsx"
+    filepath="/Users/**.xlsx"
     #打开Excel文件
     xlsbook=openpyxl.load_workbook(filepath)
     #获取sheet页,当前获取的是第一个sheet
@@ -370,7 +366,7 @@ def APPlogin_do():
         "sign": "19410295963916857479842017351652221837",
         "uid": "8f39cbc5-9195-46c9-9faf-8764157e97bc1646208880867"
     }
-    re=requests.post("http://apiproxytest.zuche.com/resource/carbosapi/common/login/v1",data=data)
+    re=requests.post("http://**/v1",data=data)
     print(re.status_code)
     print(re.text)
     print(re.headers)
